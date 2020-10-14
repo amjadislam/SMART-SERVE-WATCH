@@ -38,8 +38,6 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         attachViewModel()
-
-
     }
 
 
@@ -88,9 +86,7 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
     }
 
 
-    protected fun onBackPress() {
-        requireActivity().onBackPressed()
-    }
+    protected fun onBackPress() { requireActivity().onBackPressed() }
 
 
 }

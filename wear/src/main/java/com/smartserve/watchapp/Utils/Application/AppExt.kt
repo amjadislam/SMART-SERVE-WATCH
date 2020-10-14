@@ -23,6 +23,8 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
+import com.smartserve.watchapp.Models.DataModels.GeneralModels.UserModel.MenuModel
+import com.smartserve.watchapp.R
 import com.smartserve.watchapp.Utils.factory.ViewModelFactory
 import com.smartserve.watchapp.Views.dialog.AlertMessageDialog
 import retrofit2.Call
@@ -31,6 +33,7 @@ import retrofit2.Response
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 fun <T : ViewModel> AppCompatActivity.obtainViewModel(viewModelClass: Class<T>) =
@@ -43,7 +46,6 @@ fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>) =
     ViewModelProviders.of(this, ViewModelFactory.getInstance(this.activity?.application!!)).get(
         viewModelClass
     )
-
 
 
 fun View.hideKeyboard() {
@@ -63,18 +65,17 @@ fun EditText.isEmailValid(): Boolean {
 }
 
 
-
-fun ImageView.loadImage(url:String) {
+fun ImageView.loadImage(url: String) {
     val circularProgressDrawable = context?.let { CircularProgressDrawable(it) }
     circularProgressDrawable?.strokeWidth = 5f
     circularProgressDrawable?.centerRadius = 30f
     circularProgressDrawable?.start()
     context?.let {
-            Glide.with(it)
-                .load(url)
-                .placeholder(circularProgressDrawable)
-                .into(this)
-        }
+        Glide.with(it)
+            .load(url)
+            .placeholder(circularProgressDrawable)
+            .into(this)
+    }
 
 }
 
@@ -91,15 +92,13 @@ fun TextView.showStrikeThrough(show: Boolean) {
 }
 
 
-
-
-fun<T> Call<T>.enqueue(callback: CallBackKt<T>.() -> Unit) {
+fun <T> Call<T>.enqueue(callback: CallBackKt<T>.() -> Unit) {
     val callBackKt = CallBackKt<T>()
     callback.invoke(callBackKt)
     this.enqueue(callBackKt)
 }
 
-class CallBackKt<T>: Callback<T> {
+class CallBackKt<T> : Callback<T> {
 
     var onSucessResponse: ((Response<T>) -> Unit)? = null
     var onErrorResponse: ((String?) -> Unit)? = null
@@ -110,32 +109,21 @@ class CallBackKt<T>: Callback<T> {
     }
 
     override fun onResponse(call: Call<T>, response: Response<T>) {
-        if(response.isSuccessful)
-        {
-            if(response.body()!=null)
-            {
+        if (response.isSuccessful) {
+            if (response.body() != null) {
                 onSucessResponse?.invoke(response)
-            }
-            else if(response.errorBody()!=null)
-            {
+            } else if (response.errorBody() != null) {
                 onErrorResponse?.invoke(response.errorBody()?.string())
-            }
-            else
-            {
+            } else {
                 onFailure?.invoke(Throwable("No error mentioned"))
             }
 
-        }
-        else
-        {
+        } else {
             onErrorResponse?.invoke(response.errorBody()?.string())
         }
     }
 
 }
-
-
-
 
 
 fun View.visible() {
@@ -150,44 +138,36 @@ fun View.gone() {
     this.visibility = View.GONE
 }
 
-fun View.isVisibleToUser():Boolean
-{
-    return visibility==View.VISIBLE
+fun View.isVisibleToUser(): Boolean {
+    return visibility == View.VISIBLE
 }
 
-fun EditText.string():String
-{
+fun EditText.string(): String {
     return this.text.toString().trim()
 }
 
-fun String?.requireString():String
-{
-    return ""+this
+fun String?.requireString(): String {
+    return "" + this
 }
 
-fun EditText.Error(errorMessage:String?)
-{
-    error="Field required"
+fun EditText.Error(errorMessage: String?) {
+    error = "Field required"
     errorMessage?.let {
-        error=errorMessage
+        error = errorMessage
     }
     requestFocus()
 
 }
 
-fun TextInputLayout.errorSet(errorMessage:String?)
-{
-    error="Field required"
+fun TextInputLayout.errorSet(errorMessage: String?) {
+    error = "Field required"
     errorMessage?.let {
-        error=errorMessage
+        error = errorMessage
     }
-    isErrorEnabled=true
+    isErrorEnabled = true
     requestFocus()
 
 }
-
-
-
 
 
 fun Context.newNavigatorIntent(
@@ -208,7 +188,7 @@ fun Context.newNavigatorIntent(
 }
 
 
-fun Context.newDialerIntent( phone: String): Intent? {
+fun Context.newDialerIntent(phone: String): Intent? {
     val intent = Intent(Intent.ACTION_DIAL)
     intent.data = Uri.parse("tel:$phone")
     return if (intent.resolveActivity(this.packageManager) != null) {
@@ -240,7 +220,7 @@ fun Context.newSendEmailIntent(
     return newSendEmailsIntent(arrayOf(email), subject, text)
 }
 
-fun Context.newOpenUrlIntent( url: String?): Intent? {
+fun Context.newOpenUrlIntent(url: String?): Intent? {
     val urlIntent = Intent(Intent.ACTION_VIEW)
     urlIntent.data = Uri.parse(url)
     return if (urlIntent.resolveActivity(this.packageManager) != null) {
@@ -281,31 +261,27 @@ fun Activity.openActivityWithExist(clazz: Class<out Activity>) {
 }
 
 
-fun Activity.openActivityForResult(clazz: Class<out Activity>,requestCode:Int) {
-    startActivityForResult(Intent(this, clazz),requestCode)
+fun Activity.openActivityForResult(clazz: Class<out Activity>, requestCode: Int) {
+    startActivityForResult(Intent(this, clazz), requestCode)
 }
-
 
 
 fun Fragment.showAlertDialog(msg: String) {
-    var newMessage=msg
-    if(newMessage.isEmpty())
-    {
-        newMessage="Unable to process your request \nPlease try again later !!"
+    var newMessage = msg
+    if (newMessage.isEmpty()) {
+        newMessage = "Unable to process your request \nPlease try again later !!"
     }
-    AlertMessageDialog.newInstance(newMessage).show(requireActivity().supportFragmentManager, AlertMessageDialog.TAG)
+    AlertMessageDialog.newInstance(newMessage)
+        .show(requireActivity().supportFragmentManager, AlertMessageDialog.TAG)
 }
 
 fun FragmentActivity.showAlertDialog(msg: String) {
-    var newMessage=msg
-    if(newMessage.isEmpty())
-    {
-        newMessage="Unable to process your request \nPlease try again later !!"
+    var newMessage = msg
+    if (newMessage.isEmpty()) {
+        newMessage = "Unable to process your request \nPlease try again later !!"
     }
     AlertMessageDialog.newInstance(newMessage).show(supportFragmentManager, AlertMessageDialog.TAG)
 }
-
-
 
 
 fun View.collapse() {
@@ -334,9 +310,7 @@ fun View.collapse() {
 }
 
 
-
-
-fun View.expand( ) {
+fun View.expand() {
     val animate = TranslateAnimation(
         0f,
         0f,
@@ -362,9 +336,7 @@ fun View.expand( ) {
 }
 
 
-
-
-fun View.showSnackBar( message: String) {
+fun View.showSnackBar(message: String) {
     val snackbar = Snackbar.make(this, message, Snackbar.LENGTH_LONG)
     snackbar.show()
 }
@@ -378,10 +350,6 @@ fun Fragment.showToast(message: String) {
 }
 
 
-
-
-
-
 fun Fragment.getSimpleName(): String {
     return this.javaClass.simpleName
 }
@@ -391,66 +359,61 @@ fun Fragment.getColorCustom(color: Int): Int {
 }
 
 
-
-
-fun Date.dateWithUTCTimeZone():String
-{
-    val sdf= SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
+fun Date.dateWithUTCTimeZone(): String {
+    val sdf = SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
     sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
     return sdf.format(this)
 }
 
-fun String.getDateWithCurrentTimeZone():String
-{
-    val sdf= SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
+fun String.getDateWithCurrentTimeZone(): String {
+    val sdf = SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
     sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-    val date= sdf.parse(this)
+    val date = sdf.parse(this)
     sdf.setTimeZone(TimeZone.getDefault())
-    return ""+date?.dateWithCurrentTimeZone()
+    return "" + date?.dateWithCurrentTimeZone()
 }
 
-fun Date.dateWithCurrentTimeZone():String
-{
-    val sdf= SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
+fun Date.dateWithCurrentTimeZone(): String {
+    val sdf = SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
     sdf.setTimeZone(TimeZone.getDefault());
     return sdf.format(this)
 }
 
 
-
-
-fun Fragment.getColorToLoad(id:Int):Int
-{
+fun Fragment.getColorToLoad(id: Int): Int {
     return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
         requireContext().getColor(id)
-    }
-    else {
+    } else {
         requireContext().resources.getColor(id)
     }
 }
 
 
-
-fun EditText.getString():String{
-    if(this.text.isNullOrEmpty())
-    {
+fun EditText.getString(): String {
+    if (this.text.isNullOrEmpty()) {
         return ""
-    }
-    else
-    {
+    } else {
         return this.text.toString()
     }
 }
 
-fun EditText.getInt():Int{
-    var value=0
+fun EditText.getInt(): Int {
+    var value = 0
     try {
-       value= this.text.toString().toInt()
-    } catch (e:Exception) { }
+        value = this.text.toString().toInt()
+    } catch (e: Exception) {
+    }
     return value
 }
 
-
+fun View.loadMenuItems():ArrayList<MenuModel>{
+    val menus = ArrayList<MenuModel>()
+    menus.add(MenuModel(1, R.drawable.icon_notification,context.getString(R.string.notification)))
+    menus.add(MenuModel(2, R.drawable.icon_waiter,context.getString(R.string.waiter_list)))
+    menus.add(MenuModel(3, R.drawable.billicon,context.getString(R.string.paid_bills)))
+    menus.add(MenuModel(4, R.drawable.icon_logout,context.getString(R.string.logout)))
+    return menus
+}
 
 
 

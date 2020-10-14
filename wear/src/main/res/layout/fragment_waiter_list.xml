@@ -6,12 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".activities.MessagesActivity"
     tools:deviceIds="wear">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/waiterList"
+        android:id="@+id/rvWaiterList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/waiter_list_item" />
 
 </LinearLayout>

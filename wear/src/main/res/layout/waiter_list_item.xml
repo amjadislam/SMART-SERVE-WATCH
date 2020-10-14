@@ -16,7 +16,7 @@
         android:layout_gravity="center"
         android:textStyle="bold"
         android:textSize="30sp"
-        tools:text="dssdf"
+        tools:text="test name"
         android:layout_centerInParent="true"
         android:textColor="@color/colorAccent" />
 

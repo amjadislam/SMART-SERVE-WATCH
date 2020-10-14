@@ -6,6 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.smartserve.watchapp.Models.DataModels.GeneralModels.UserModel.UserModel
 import com.smartserve.watchapp.Models.DataModels.RequestModels.LoginRequestModel.LoginRequestModel
 import com.smartserve.watchapp.Models.DataModels.RequestModels.SignUpRequestModel.SignUpRequestModel
+import com.smartserve.watchapp.Models.DataModels.ResponseModels.GetNotificationResponse
+import com.smartserve.watchapp.Models.DataModels.ResponseModels.GetPaidBillResponse
+import com.smartserve.watchapp.Models.DataModels.ResponseModels.GetWaiterListResponse
 import com.smartserve.watchapp.Models.DataModels.UtilityModels.BaseResponse
 import com.smartserve.watchapp.Models.Source.Repository.DataRepository
 import com.smartserve.watchapp.Utils.GeneralUtils.OneShotEvent
@@ -20,10 +23,10 @@ class ProfileViewModel(private val dataRepository: DataRepository) : BaseAndroid
     var userLiveData: MutableLiveData<OneShotEvent<UserModel>> = MutableLiveData()
     var forgotPassLiveData: MutableLiveData<OneShotEvent<Boolean>> = MutableLiveData()
     var verifyCodeLiveData: MutableLiveData<OneShotEvent<Boolean>> = MutableLiveData()
-    var updatePasswordLiveData: MutableLiveData<OneShotEvent<BaseResponse>> = MutableLiveData()
-    var changePasswordLiveData: MutableLiveData<OneShotEvent<Boolean>> = MutableLiveData()
-    var userLogoutLiveData: MutableLiveData<OneShotEvent<Boolean>> = MutableLiveData()
-
+    var getNotificationResponse: MutableLiveData<OneShotEvent<GetNotificationResponse>> =
+        MutableLiveData()
+    var getPaidBillsResponse: MutableLiveData<OneShotEvent<GetPaidBillResponse>> = MutableLiveData()
+    var getWaiterResponse: MutableLiveData<OneShotEvent<GetWaiterListResponse>> = MutableLiveData()
 
 
     fun loginUser(loginRequestModel: LoginRequestModel) {
@@ -45,7 +48,7 @@ class ProfileViewModel(private val dataRepository: DataRepository) : BaseAndroid
     }
 
 
-    fun signupUser( signUpRequestModel: SignUpRequestModel) {
+    fun signupUser(signUpRequestModel: SignUpRequestModel) {
         showProgressBar(true)
         viewModelScope.launch {
             dataRepository.userSignUp(signUpRequestModel)?.let { response ->
@@ -64,120 +67,53 @@ class ProfileViewModel(private val dataRepository: DataRepository) : BaseAndroid
     }
 
 
-//    fun forgotPassword(email: String) {
-//        showProgressBar(true)
-//        viewModelScope.launch {
-//            dataRepositery.forgotPassword(email)?.let { response ->
-//                showProgressBar(false)
-//                when (response) {
-//                    is ResultWrapper.Success ->
-//                        if (isSuccess(response.value)) {
-//                            forgotPassLiveData.value = OneShotEvent(true)
-//                        }
-//                    else -> handleErrorType(response)
-//                }
-//            }
-//
-//        }
-//
-//    }
-//
-//
-//    fun verifyPinCode(email: String,code:String) {
-//        showProgressBar(true)
-//        viewModelScope.launch {
-//            dataRepositery.verifyCode(email,code)?.let { response ->
-//                showProgressBar(false)
-//                when (response) {
-//                    is ResultWrapper.Success ->
-//                        if (isSuccess(response.value)) {
-//                            verifyCodeLiveData.value = OneShotEvent(true)
-//                        }
-//                    else -> handleErrorType(response)
-//                }
-//            }
-//
-//        }
-//
-//    }
-//
-//
-//    fun updatePassword(email: String,newPassword:String) {
-//        showProgressBar(true)
-//        viewModelScope.launch {
-//            dataRepositery.updatePassword(email,newPassword)?.let { response ->
-//                showProgressBar(false)
-//                when (response) {
-//                    is ResultWrapper.Success ->
-//                        if (isSuccess(response.value)) {
-//                            updatePasswordLiveData.value = OneShotEvent(response.value)
-//                        }
-//                    else -> handleErrorType(response)
-//                }
-//            }
-//
-//        }
-//
-//    }
-//
-//
-//    fun changePassword(oldPassword: String,newPassword:String) {
-//        showProgressBar(true)
-//        viewModelScope.launch {
-//            dataRepositery.changePassword(oldPassword,newPassword)?.let { response ->
-//                showProgressBar(false)
-//                when (response) {
-//                    is ResultWrapper.Success ->
-//                        if (isSuccess(response.value)) {
-//                            changePasswordLiveData.value = OneShotEvent(true)
-//                        }
-//                    else -> handleErrorType(response)
-//                }
-//            }
-//
-//        }
-//
-//    }
-//
-//
-//    fun getProfile() {
-//        showProgressBar(true)
-//        viewModelScope.launch {
-//            dataRepositery.getProfile()?.let { response ->
-//                showProgressBar(false)
-//                when (response) {
-//                    is ResultWrapper.Success ->
-//                        if (isSuccess(response.value)) {
-//                            userLiveData.value = OneShotEvent(response.value.data)
-//                        }
-//                    else -> handleErrorType(response)
-//                }
-//            }
-//
-//        }
-//
-//    }
-//
-//
-//    fun userLogout() {
-//        showProgressBar(true)
-//        viewModelScope.launch {
-//            dataRepositery.logoutUser()?.let { response ->
-//                showProgressBar(false)
-//                when (response) {
-//                    is ResultWrapper.Success ->
-//                        if (isSuccess(response.value)) {
-//                            userLogoutLiveData.value = OneShotEvent(true)
-//                        }
-//                    else -> handleErrorType(response)
-//                }
-//            }
-//
-//        }
-//
-//    }
+    fun getNotifications() {
+        showProgressBar(true)
+        viewModelScope.launch {
+            dataRepository.getNotifications()?.let { response ->
+                showProgressBar(false)
+                when (response) {
+                    is ResultWrapper.Success ->
+                        if (isSuccess(response.value)) {
+                            getNotificationResponse.value = OneShotEvent(response.value)
+                        }
+                    else -> handleErrorType(response)
+                }
+            }
+        }
+    }
 
+    fun getWaiters() {
+        showProgressBar(true)
+        viewModelScope.launch {
+            dataRepository.getWaiterList()?.let { response ->
+                showProgressBar(false)
+                when (response) {
+                    is ResultWrapper.Success ->
+                        if (isSuccess(response.value)) {
+                            getWaiterResponse.value = OneShotEvent(response.value)
+                        }
+                    else -> handleErrorType(response)
+                }
+            }
+        }
+    }
 
+    fun getPaidBills() {
+        showProgressBar(true)
+        viewModelScope.launch {
+            dataRepository.getPaidBills()?.let { response ->
+                showProgressBar(false)
+                when (response) {
+                    is ResultWrapper.Success ->
+                        if (isSuccess(response.value)) {
+                            getPaidBillsResponse.value = OneShotEvent(response.value)
+                        }
+                    else -> handleErrorType(response)
+                }
+            }
+        }
+    }
 
 
 }

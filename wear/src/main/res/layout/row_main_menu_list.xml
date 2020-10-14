@@ -18,7 +18,7 @@
 
 
         <ImageView
-            android:id="@+id/imageView_menulist_itemMenuIcon"
+            android:id="@+id/ivMenu"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:adjustViewBounds="true"
@@ -46,7 +46,7 @@
 
 
     <TextView
-        android:id="@+id/textView_menulist_itemMenuText"
+        android:id="@+id/tvMenuTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

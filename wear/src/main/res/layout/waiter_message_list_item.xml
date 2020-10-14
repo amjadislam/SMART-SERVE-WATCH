@@ -53,7 +53,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="center"
                 android:textColor="@color/colorBlack"
-                tools:text="A quick brown fox jumps over the lazy dog...A quick brown fox jumps over the lazy dog...A quick brown fox jumps over the lazy dog...A quick brown fox jumps over the lazy dog" />
+                tools:text="test message" />
         </LinearLayout>
 
     </RelativeLayout>
