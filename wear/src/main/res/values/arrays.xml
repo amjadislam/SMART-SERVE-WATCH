@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer-array name="icons_reply">
+        <item>@drawable/icon_message</item>
+        <item>@drawable/icon_message</item>
+        <item>@drawable/icon_message</item>
+        <item>@drawable/icon_message</item>
+        <item>@drawable/icon_message</item>
+        <item>@drawable/icon_message</item>
+    </integer-array>
+
+    <string-array name="messages_reply">
+        <item>I am coming</item>
+        <item>Ok, sir</item>
+        <item>Preparing</item>
+        <item>In Process</item>
+        <item>On the way</item>
+        <item>About to serve</item>
+    </string-array>
+
+
+    <integer-array name="icons_main_menu">
+        <item>@drawable/icon_notification</item>
+        <item>@drawable/icon_waiter</item>
+        <item>@drawable/billicon</item>
+        <item>@drawable/icon_logout</item>
+    </integer-array>
+
+    <string-array name="text_main_menu">
+        <item>@string/notification</item>
+        <item>@string/waiter_list</item>
+        <item>@string/paid_bills</item>
+        <item>@string/logout</item>
+    </string-array>
+
+</resources>

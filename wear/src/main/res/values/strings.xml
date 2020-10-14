@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SmartServe</string>
+    <string name="hello_round">Hello Round World!</string>
+    <string name="hello_square">Hello Square World!</string>
+    <string name="enter_code">Enter Code</string>
+    <string name="Login">Login</string>
+    <string name="no_internet">No Internet Connection</string>
+    <string name="retry">Retry</string>
+    <string name="notification">Notification</string>
+    <string name="waiter_list">Waiter List</string>
+    <string name="logout">Logout</string>
+    <string name="paid_bills">Paid Bills</string>
+</resources>

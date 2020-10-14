@@ -1,0 +1,231 @@
+{
+  "project_info": {
+    "project_number": "169746795137",
+    "firebase_url": "https://smartserve-246.firebaseio.com",
+    "project_id": "smartserve-246",
+    "storage_bucket": "smartserve-246.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169746795137:android:10bc458ca7d4d7c0ae1b80",
+        "android_client_info": {
+          "package_name": "com.gsgroup.smartservewatch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169746795137-kkhd05td5f5cqru7b4i6d4au4ntb6svc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gsgroup.smartservewatch",
+            "certificate_hash": "dd7f12f2416e91cd10325655c29a57dab5848edd"
+          }
+        },
+        {
+          "client_id": "169746795137-7hd3p98ut0ede1fvjjikd1as71b5btli.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnvfxNgVuBpbTyjl3mkKDvSs2h6BMns2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169746795137-7hd3p98ut0ede1fvjjikd1as71b5btli.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "169746795137-tulpe1oovaj871qsraihiaq64lgn4llh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gsgroup.smartserve"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169746795137:android:084bbbb1a4020255ae1b80",
+        "android_client_info": {
+          "package_name": "com.smartserve.consumer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169746795137-dufmuunkkugvvgg14kkfp0imnsri2on6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smartserve.consumer",
+            "certificate_hash": "34a6c22bd312afa04b82f9327846a1eae3674049"
+          }
+        },
+        {
+          "client_id": "169746795137-4nsdcfe92qf2trdpaj2624av8rmn8c4v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smartserve.consumer",
+            "certificate_hash": "dd7f12f2416e91cd10325655c29a57dab5848edd"
+          }
+        },
+        {
+          "client_id": "169746795137-vgstgalod19ml7odivcvkgsu3q62898t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smartserve.consumer",
+            "certificate_hash": "7012d6c3639140052076cf0b782e9d91e06d31a6"
+          }
+        },
+        {
+          "client_id": "169746795137-7hd3p98ut0ede1fvjjikd1as71b5btli.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnvfxNgVuBpbTyjl3mkKDvSs2h6BMns2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169746795137-7hd3p98ut0ede1fvjjikd1as71b5btli.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "169746795137-tulpe1oovaj871qsraihiaq64lgn4llh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gsgroup.smartserve"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169746795137:android:d7ab89a86c941e10ae1b80",
+        "android_client_info": {
+          "package_name": "com.smartserve.pos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169746795137-v73us5g9eltvd711bdmbg7n69pn0vt69.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smartserve.pos",
+            "certificate_hash": "dd7f12f2416e91cd10325655c29a57dab5848edd"
+          }
+        },
+        {
+          "client_id": "169746795137-7hd3p98ut0ede1fvjjikd1as71b5btli.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnvfxNgVuBpbTyjl3mkKDvSs2h6BMns2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169746795137-7hd3p98ut0ede1fvjjikd1as71b5btli.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "169746795137-tulpe1oovaj871qsraihiaq64lgn4llh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gsgroup.smartserve"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169746795137:android:d7803e18a40286caae1b80",
+        "android_client_info": {
+          "package_name": "com.smartserve.tablet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169746795137-7hd3p98ut0ede1fvjjikd1as71b5btli.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnvfxNgVuBpbTyjl3mkKDvSs2h6BMns2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169746795137-7hd3p98ut0ede1fvjjikd1as71b5btli.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "169746795137-tulpe1oovaj871qsraihiaq64lgn4llh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gsgroup.smartserve"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169746795137:android:111ad85a7a1d9ff1ae1b80",
+        "android_client_info": {
+          "package_name": "com.smartserve.watchapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169746795137-7hd3p98ut0ede1fvjjikd1as71b5btli.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnvfxNgVuBpbTyjl3mkKDvSs2h6BMns2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169746795137-7hd3p98ut0ede1fvjjikd1as71b5btli.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "169746795137-tulpe1oovaj871qsraihiaq64lgn4llh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gsgroup.smartserve"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

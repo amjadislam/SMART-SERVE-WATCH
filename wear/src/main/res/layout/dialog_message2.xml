@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGrayMedium"
+    tools:context=".activities.ReplyActivity">
+
+        <ScrollView
+            android:id="@+id/scrollView_tab1_list_feedDescription"
+            android:layout_width="match_parent"
+            android:paddingTop="@dimen/header_start_padding"
+            android:paddingLeft="@dimen/header_end_padding"
+            android:paddingRight="@dimen/header_end_padding"
+            android:layout_above="@+id/button_replyButton"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView_messageBody"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="26sp"
+                android:text="This notification details textThis notification details textThis notification details textThis notification details textThis notification details textThis notification details textThis notification details textThis notification details textThis notification details textThis notification details text"
+                android:textColor="@color/colorBlack" />
+        </ScrollView>
+
+        <Button
+            android:id="@+id/button_replyButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:layout_marginTop="5dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:background="@color/colorAccent"
+            android:layout_alignParentBottom="true"
+            android:minEms="10"
+            android:gravity="center"
+            android:text="Reply"
+            android:textSize="24sp"
+            android:textColor="@color/colorWhite" />
+
+</RelativeLayout>
