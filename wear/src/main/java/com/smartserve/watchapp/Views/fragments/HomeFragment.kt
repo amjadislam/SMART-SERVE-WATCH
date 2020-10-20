@@ -9,6 +9,10 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class HomeFragment : BaseFragment(R.layout.fragment_home), BaseAdapter.OnItemClicker {
     override fun initViews() {
         rvMenu.adapter = HomeMenuAdapter(rvMenu.loadMenuItems(),this)
+
+        arguments?.let {
+            HomeFragmentArgs.fromBundle(it).test
+        }
     }
 
     override fun attachViewModel() {

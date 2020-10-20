@@ -4,12 +4,14 @@ import android.content.Context
 import com.smartserve.watchapp.Models.DataModels.RequestModels.LoginRequestModel.LoginRequestModel
 import com.smartserve.watchapp.Models.DataModels.RequestModels.SignUpRequestModel.SignUpRequestModel
 import com.smartserve.watchapp.Models.DataModels.ResponseModels.*
+import com.smartserve.watchapp.Models.Source.ServerConnection.RetrofitClientInstance
+import com.smartserve.watchapp.Utils.GeneralUtils.SessionManager
 
 import com.smartserve.watchapp.Utils.NetworkUtils.ResultWrapper
 import com.smartserve.watchapp.Utils.NetworkUtils.safeApiCall
 
 
-class DataRepository(context: Context) :BaseRepository(context) {
+class DataRepository(sessionManager: SessionManager, retrofitClientInstance: RetrofitClientInstance) :BaseRepository(sessionManager,retrofitClientInstance) {
 
 
 

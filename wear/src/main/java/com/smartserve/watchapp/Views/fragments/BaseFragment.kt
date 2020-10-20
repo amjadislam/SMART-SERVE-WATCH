@@ -5,6 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 
 import com.smartserve.watchapp.R
@@ -13,6 +14,7 @@ import com.smartserve.watchapp.Utils.GeneralUtils.DialogUtils
 import com.smartserve.watchapp.Utils.GeneralUtils.SessionManager
 import com.smartserve.watchapp.ViewModels.BaseAndroidViewModel
 import com.smartserve.watchapp.Views.activities.MainActivity
+import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
@@ -20,7 +22,7 @@ import org.koin.core.parameter.parametersOf
 abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
 
     lateinit var dialog: AlertDialog
-    val sessionManager: SessionManager by inject { parametersOf(this) }
+    val sessionManager: SessionManager = get()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,12 +57,9 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
     }
 
 
-    fun navigateToFragment(action: Int, bundle: Bundle? = null) {
-
-        val navController =
-            Navigation.findNavController(activity as MainActivity, R.id.nav_host_fragment)
-        navController.navigate(action, bundle)
-
+    fun navigateToFragment(navDirections: NavDirections) {
+        val navController = Navigation.findNavController(activity as MainActivity, R.id.nav_host_fragment)
+        navController.navigate(navDirections)
     }
 
 

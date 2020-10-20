@@ -2,15 +2,9 @@ package com.smartserve.watchapp.Utils.Application
 
 import android.app.Application
 import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
-
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import org.koin.core.module.Module
-import org.koin.dsl.koinApplication
-import org.koin.dsl.module
+import org.koin.core.logger.Level
 
 
 class SmartServeKitchenApplication: Application() {
@@ -18,8 +12,9 @@ class SmartServeKitchenApplication: Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin{
+            androidLogger(Level.NONE)
             androidContext(this@SmartServeKitchenApplication)
-            listOf(applicationModule, viewModelModules)
+            modules(listOf(applicationModule, viewModelModules))
         }
     }
 

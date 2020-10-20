@@ -6,6 +6,9 @@ import com.smartserve.watchapp.Views.adapters.WaiterListAdapter
 import kotlinx.android.synthetic.main.fragment_waiter_list.*
 
 class WaiterListFragment : BaseFragment(R.layout.fragment_waiter_list), BaseAdapter.OnItemClicker {
+
+
+
     override fun initViews() {
         rvWaiterList.adapter = WaiterListAdapter(waiters, this)
     }

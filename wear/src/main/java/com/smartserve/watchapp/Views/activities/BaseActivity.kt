@@ -8,10 +8,11 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.smartserve.watchapp.Utils.Application.openActivityWithExist
 import com.smartserve.watchapp.Utils.GeneralUtils.DialogUtils
 import com.smartserve.watchapp.Utils.GeneralUtils.SessionManager
+import org.koin.android.ext.android.get
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    lateinit var sessionManager: SessionManager
+    val sessionManager: SessionManager = get()
     var dialog: AlertDialog?= null
 
 
@@ -19,7 +20,6 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
         dialog = DialogUtils.getProgressDialog(this)
-        sessionManager = SessionManager(this)
         initViews()
     }
 
@@ -41,6 +41,9 @@ abstract class BaseActivity : AppCompatActivity() {
     {
         openActivityWithExist(SplashActivity::class.java)
     }
+
+
+
     fun showProgressDialog(show: Boolean) {
 
         if (dialog != null && show) {

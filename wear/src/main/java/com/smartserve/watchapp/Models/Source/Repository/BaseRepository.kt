@@ -10,43 +10,27 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
 
-open class BaseRepository(ctx: Context) {
-
-    var context: Context
-    var sessionManager: SessionManager? = null
+open class BaseRepository(
+    var sessionManager: SessionManager,
+    var retrofitClientInstance: RetrofitClientInstance
+) {
     val dispatcher: CoroutineDispatcher = Dispatchers.IO
-    var userId:String =""
+    var userId: String = ""
 
     var gson = Gson()
 
     init {
-        context = ctx
-        sessionManager = SessionManager(context)
-        userId=sessionManager!!.getUserId()
+        userId = sessionManager!!.getUserId()
 
     }
-
-
 
 
     fun getApiService(): ApiService {
-        if(userId.isNullOrEmpty())
-        {
-            userId=sessionManager!!.getUserId()
+        if (userId.isNullOrEmpty()) {
+            userId = sessionManager!!.getUserId()
         }
-        return RetrofitClientInstance.getInstance(context)!!.getService()
+        return retrofitClientInstance.getService()
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

@@ -9,7 +9,6 @@ import com.rapidzz.garageapp.ViewModels.ProfileViewModel
 import com.smartserve.watchapp.R
 import com.smartserve.watchapp.Views.adapters.BaseAdapter
 import com.smartserve.watchapp.Views.dialog.ConfirmationDialog
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity(), BaseAdapter.OnItemClicker {
 

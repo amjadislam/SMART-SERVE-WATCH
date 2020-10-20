@@ -25,7 +25,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.smartserve.watchapp.Models.DataModels.GeneralModels.UserModel.MenuModel
 import com.smartserve.watchapp.R
-import com.smartserve.watchapp.Utils.factory.ViewModelFactory
 import com.smartserve.watchapp.Views.dialog.AlertMessageDialog
 import retrofit2.Call
 import retrofit2.Callback
@@ -36,16 +35,6 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-fun <T : ViewModel> AppCompatActivity.obtainViewModel(viewModelClass: Class<T>) =
-    ViewModelProviders.of(this, ViewModelFactory.getInstance(application)).get(viewModelClass)
-
-fun <T : ViewModel> FragmentActivity.obtainViewModel(viewModelClass: Class<T>) =
-    ViewModelProviders.of(this, ViewModelFactory.getInstance(application)).get(viewModelClass)
-
-fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>) =
-    ViewModelProviders.of(this, ViewModelFactory.getInstance(this.activity?.application!!)).get(
-        viewModelClass
-    )
 
 
 fun View.hideKeyboard() {
