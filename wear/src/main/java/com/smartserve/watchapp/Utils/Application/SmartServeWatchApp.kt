@@ -7,13 +7,13 @@ import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
 
-class SmartServeKitchenApplication: Application() {
+class SmartServeWatchApp: Application() {
 
     override fun onCreate() {
         super.onCreate()
         startKoin{
             androidLogger(Level.NONE)
-            androidContext(this@SmartServeKitchenApplication)
+            androidContext(this@SmartServeWatchApp)
             modules(listOf(applicationModule, viewModelModules))
         }
     }

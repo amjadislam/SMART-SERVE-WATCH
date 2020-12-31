@@ -1,5 +1,6 @@
 package com.smartserve.watchapp.Utils.Application
 
+import com.rapidzz.garageapp.ViewModels.MainFunctionsViewModel
 import com.rapidzz.garageapp.ViewModels.ProfileViewModel
 import com.smartserve.watchapp.Models.Source.Repository.DataRepository
 import com.smartserve.watchapp.Models.Source.ServerConnection.RetrofitClientInstance
@@ -10,15 +11,19 @@ import org.koin.dsl.module
 
 val applicationModule = module {
 
-    single { RetrofitClientInstance(get()) }
+    factory { RetrofitClientInstance(get()) }
     single { SessionManager(get()) }
-    single { DataRepository(get(),get()) }
+    factory { DataRepository(get(),get()) }
 
 }
 
 val viewModelModules = module {
     viewModel {
         ProfileViewModel(get())
+    }
+
+    viewModel {
+        MainFunctionsViewModel(get())
     }
 }
 

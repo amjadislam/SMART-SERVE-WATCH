@@ -42,6 +42,10 @@ abstract class BaseActivity : AppCompatActivity() {
         openActivityWithExist(SplashActivity::class.java)
     }
 
+    fun gotoLoginActivity()
+    {
+        openActivityWithExist(LoginActivity::class.java)
+    }
 
 
     fun showProgressDialog(show: Boolean) {

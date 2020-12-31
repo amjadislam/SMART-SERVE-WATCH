@@ -18,7 +18,7 @@ class RetrofitClientInstance(ctx : Context) {
     private val httpClient = OkHttpClient.Builder()
     var context: Context
 
-    val BASE_URL = "http://mashghol.com/garage/public/api/"
+    val BASE_URL = "http://mashghol.com/smartseve-api/public/api/v1/"
 
     init {
         context = ctx
@@ -61,6 +61,7 @@ class RetrofitClientInstance(ctx : Context) {
 
     private fun getLoggingInterceptor(): HttpLoggingInterceptor {
         val loggingIntercepter = HttpLoggingInterceptor()
+        loggingIntercepter.level=HttpLoggingInterceptor.Level.BODY
         return loggingIntercepter
     }
 
