@@ -1,8 +1,10 @@
 package com.smartserve.watchapp.Views.fragments
 
 import com.rapidzz.garageapp.ViewModels.MainFunctionsViewModel
+import com.smartserve.watchapp.Models.DataModels.GeneralModels.NotificationItem
 import com.smartserve.watchapp.R
 import com.smartserve.watchapp.Utils.Application.getCurrentDate
+import com.smartserve.watchapp.Utils.Application.showAlertDialog
 import com.smartserve.watchapp.Views.adapters.BaseAdapter
 import com.smartserve.watchapp.Views.adapters.NotificationAdapter
 import com.smartserve.watchapp.Views.adapters.PaidBillAdapter
@@ -14,19 +16,31 @@ class PaidBillFragment : BaseFragment(R.layout.fragment_paid_bill), BaseAdapter.
 
     val viewModel: MainFunctionsViewModel by viewModel()
 
+    var bills = ArrayList<NotificationItem>()
+
+    private var billPaidAdapter: PaidBillAdapter? = null
+
 
     override fun initViews() {
-        rvPaidBills.adapter = PaidBillAdapter(bills, this)
+        billPaidAdapter = PaidBillAdapter(bills, this)
+        rvPaidBills.adapter = billPaidAdapter
     }
 
-    var bills = ArrayList<String>()
+
     override fun attachViewModel() {
 
         with(viewModel)
         {
             setupGeneralViewModel(this)
-            paidBillsResponseLiveData.observe(viewLifecycleOwner){
+            paidBillsResponseLiveData.observe(viewLifecycleOwner) {
                 it.getContentIfNotHandled()?.let {
+                    bills.clear()
+                    bills.addAll(it.data)
+                    billPaidAdapter?.notifyDataSetChanged()
+                    if(bills.isNullOrEmpty())
+                    {
+                        showAlertDialog("No paid bill notifications found")
+                    }
 
                 }
             }
