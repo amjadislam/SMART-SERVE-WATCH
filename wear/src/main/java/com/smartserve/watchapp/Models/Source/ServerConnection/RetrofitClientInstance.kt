@@ -19,8 +19,8 @@ class RetrofitClientInstance(ctx: Context) {
     private val httpClient = OkHttpClient.Builder()
     var context: Context
 
-    //    val BASE_URL = "http://mashghol.com/smartseve-api/public/api/v1/"
-    val BASE_URL = "https://smartserveapp.com/api/v1/"
+        val BASE_URL = "http://mashghol.com/smartseve-api/public/api/v1/"
+//    val BASE_URL = "https://smartserveapp.com/api/v1/"
 
     init {
         context = ctx
@@ -31,7 +31,7 @@ class RetrofitClientInstance(ctx: Context) {
 
 
     fun initRetrofit() {
-        var retrofitBuilder = retrofit2.Retrofit.Builder()
+        val retrofitBuilder = retrofit2.Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
         httpClient.callTimeout(120, TimeUnit.SECONDS).connectTimeout(30, TimeUnit.SECONDS)
@@ -73,20 +73,15 @@ class RetrofitClientInstance(ctx: Context) {
     ) : Interceptor {
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response {
-            var original: Request = chain.request()
+            val original: Request = chain.request()
             val builder = original.newBuilder()
-                .header("Authorization", "Bearer ${authToken}")
-            var request = builder.build()
+                .header("Authorization", "Bearer $authToken")
+            val request = builder.build()
             val response = chain.proceed(request)
             if (response.code() != 401) {
                 return response
             } else {
-                context.applicationContext.startActivity(
-                    Intent(
-                        context,
-                        SplashActivity::class.java
-                    )
-                )
+                context.applicationContext.startActivity(Intent(context, SplashActivity::class.java))
                 return response
             }
             /* else {
@@ -115,42 +110,13 @@ class RetrofitClientInstance(ctx: Context) {
     }
 
 
-    private fun refreshToken(): Int {
-
-
-        var retrofitBuilder2 = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-
-        val clientBuilder = OkHttpClient.Builder()
-
-        var retrofit2 = retrofitBuilder2.client(clientBuilder.build()).build()
-        var apiService = retrofit2.create<ApiService>(ApiService::class.java)
-        val body = RequestBody.create(MediaType.parse("text/plain"), "refresh_token")
-
-        var userEmail = SessionManager(context).getEmail()
-        return 200
-        /*    var userPass=SessionManager(context).getPassword()
-            var updateToken = apiService.userLogin(userEmail,userPass,"password").execute().body()
-            if (updateToken != null) {
-                SessionManager(context).setAuthenticationToken(updateToken!!.access_token);
-                return 200;
-            } else {
-                return 400
-            }*/
-    }
-
 
     companion object {
         var singleInstance: RetrofitClientInstance? = null
 
         fun getInstance(context: Context): RetrofitClientInstance? {
             if (singleInstance == null)
-                singleInstance =
-                    RetrofitClientInstance(
-                        context
-                    )
-
+                singleInstance = RetrofitClientInstance(context)
             return singleInstance
         }
     }
