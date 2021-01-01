@@ -12,16 +12,16 @@ class SplashActivity : BaseActivity() {
     override fun initViews() {
 
         Handler().postDelayed(Runnable {
-            if(sessionManager.isLoggedIn())
-            {
+            if (sessionManager.isLoggedIn()) {
                 gotoMainActivity()
-            }else {
+            } else {
                 gotoLoginActivity()
             }
         }, SPLASH_DELAY)
+        getToken()
     }
 
     override fun getLayoutId(): Int {
-       return R.layout.activity_splash
+        return R.layout.activity_splash
     }
 }

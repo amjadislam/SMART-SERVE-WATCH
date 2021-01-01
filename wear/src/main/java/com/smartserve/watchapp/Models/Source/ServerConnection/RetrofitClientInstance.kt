@@ -12,13 +12,15 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import java.util.concurrent.TimeUnit
+import kotlin.jvm.Throws
 
-class RetrofitClientInstance(ctx : Context) {
+class RetrofitClientInstance(ctx: Context) {
     private var retrofit: Retrofit? = null
     private val httpClient = OkHttpClient.Builder()
     var context: Context
 
-    val BASE_URL = "http://mashghol.com/smartseve-api/public/api/v1/"
+    //    val BASE_URL = "http://mashghol.com/smartseve-api/public/api/v1/"
+    val BASE_URL = "https://smartserveapp.com/api/v1/"
 
     init {
         context = ctx
@@ -28,12 +30,12 @@ class RetrofitClientInstance(ctx : Context) {
     }
 
 
-
-    fun initRetrofit(){
+    fun initRetrofit() {
         var retrofitBuilder = retrofit2.Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            httpClient.callTimeout(120,TimeUnit.SECONDS).connectTimeout(30,TimeUnit.SECONDS).readTimeout(120,TimeUnit.SECONDS)
+        httpClient.callTimeout(120, TimeUnit.SECONDS).connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(120, TimeUnit.SECONDS)
 
         val authToken = SessionManager(context).getAuthToken()
         if (!authToken.isNullOrEmpty()) {
@@ -53,7 +55,6 @@ class RetrofitClientInstance(ctx : Context) {
     }
 
 
-
     fun getService(): ApiService {
         return retrofit!!.create<ApiService>(ApiService::class.java)
     }
@@ -61,16 +62,9 @@ class RetrofitClientInstance(ctx : Context) {
 
     private fun getLoggingInterceptor(): HttpLoggingInterceptor {
         val loggingIntercepter = HttpLoggingInterceptor()
-        loggingIntercepter.level=HttpLoggingInterceptor.Level.BODY
+        loggingIntercepter.level = HttpLoggingInterceptor.Level.BODY
         return loggingIntercepter
     }
-
-
-
-
-
-
-
 
 
     inner class AuthenticationInterceptor internal constructor(
@@ -118,9 +112,7 @@ class RetrofitClientInstance(ctx : Context) {
         }
 
 
-
     }
-
 
 
     private fun refreshToken(): Int {
@@ -136,35 +128,17 @@ class RetrofitClientInstance(ctx : Context) {
         var apiService = retrofit2.create<ApiService>(ApiService::class.java)
         val body = RequestBody.create(MediaType.parse("text/plain"), "refresh_token")
 
-        var userEmail=SessionManager(context).getEmail()
+        var userEmail = SessionManager(context).getEmail()
         return 200
-    /*    var userPass=SessionManager(context).getPassword()
-        var updateToken = apiService.userLogin(userEmail,userPass,"password").execute().body()
-        if (updateToken != null) {
-            SessionManager(context).setAuthenticationToken(updateToken!!.access_token);
-            return 200;
-        } else {
-            return 400
-        }*/
+        /*    var userPass=SessionManager(context).getPassword()
+            var updateToken = apiService.userLogin(userEmail,userPass,"password").execute().body()
+            if (updateToken != null) {
+                SessionManager(context).setAuthenticationToken(updateToken!!.access_token);
+                return 200;
+            } else {
+                return 400
+            }*/
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     companion object {

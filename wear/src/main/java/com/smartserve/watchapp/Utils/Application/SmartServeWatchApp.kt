@@ -1,5 +1,6 @@
 package com.smartserve.watchapp.Utils.Application
 
+import android.app.Activity
 import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -17,7 +18,13 @@ class SmartServeWatchApp: Application() {
             modules(listOf(applicationModule, viewModelModules))
         }
     }
+    private var mCurrentActivity: Activity? = null
+    fun getCurrentActivity(): Activity? {
+        return mCurrentActivity
+    }
 
-
+    fun setCurrentActivity(mCurrentActivity: Activity?) {
+        this.mCurrentActivity = mCurrentActivity
+    }
 
 }

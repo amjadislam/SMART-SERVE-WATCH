@@ -1,6 +1,7 @@
 package com.smartserve.watchapp.Views.fragments
 
 
+import androidx.lifecycle.Observer
 import org.koin.android.viewmodel.ext.android.viewModel
 import com.rapidzz.garageapp.ViewModels.ProfileViewModel
 import com.smartserve.watchapp.Models.DataModels.RequestModels.LoginRequestModel.Device
@@ -23,13 +24,12 @@ class SignInFragment : BaseFragment(R.layout.activity_login) {
         setupGeneralViewModel(viewModel)
         with(viewModel)
         {
-            userLiveData.observe(viewLifecycleOwner, {
+            userLiveData.observe(viewLifecycleOwner, Observer {
                 it.getContentIfNotHandled()?.let {
 
                     sessionManager.setUser(it)
                     (requireActivity() as BaseActivity).gotoMainActivity()
                 }
-
             })
         }
 
@@ -39,12 +39,14 @@ class SignInFragment : BaseFragment(R.layout.activity_login) {
 
     override fun initViews() {
         btnSignIn.setOnClickListener {
-            if(editText_loginCode.getString().isNullOrEmpty())
-            {
+            if (editText_loginCode.getString().isNullOrEmpty()) {
                 showToast("Login code required !!")
             } else {
-                val loginRequestModel=LoginRequestModel(Device("android","",requireContext().getUniqueAndroidId()),editText_loginCode.getString())
-             viewModel.loginUser(loginRequestModel)
+                val loginRequestModel = LoginRequestModel(
+                    Device("android", "", requireContext().getUniqueAndroidId()),
+                    editText_loginCode.getString()
+                )
+                viewModel.loginUser(loginRequestModel)
             }
         }
 

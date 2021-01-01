@@ -15,22 +15,13 @@ class MainActivity : BaseActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
 
-
-
-
     override fun getLayoutId(): Int {
         return R.layout.activity_main
     }
 
 
-
-
-
     override fun initViews() {
     }
-
-
-
 
 
 }
