@@ -6,19 +6,21 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Paint
 import android.net.Uri
+import android.provider.Settings
+import android.telephony.TelephonyManager
 import android.text.TextUtils
 import android.util.Patterns
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProviders
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
@@ -29,12 +31,10 @@ import com.smartserve.watchapp.Views.dialog.AlertMessageDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Exception
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-
-
 
 
 fun View.hideKeyboard() {
@@ -176,6 +176,16 @@ fun Context.newNavigatorIntent(
     } else null
 }
 
+
+fun Context?.getUniqueAndroidId(): String {
+    var androidId =
+        Settings.Secure.getString(this?.getContentResolver(), Settings.Secure.ANDROID_ID)
+    if (androidId.isNullOrEmpty()) {
+        val telephonyManager = this?.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        androidId = telephonyManager.deviceId
+    }
+    return androidId
+}
 
 fun Context.newDialerIntent(phone: String): Intent? {
     val intent = Intent(Intent.ACTION_DIAL)
@@ -369,6 +379,13 @@ fun Date.dateWithCurrentTimeZone(): String {
 }
 
 
+fun Fragment.getCurrentDate(): String {
+    val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH)
+    val cal = Calendar.getInstance()
+    return dateFormat.format(cal.time)
+}
+
+
 fun Fragment.getColorToLoad(id: Int): Int {
     return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
         requireContext().getColor(id)
@@ -397,10 +414,10 @@ fun EditText.getInt(): Int {
 
 fun View.loadMenuItems():ArrayList<MenuModel>{
     val menus = ArrayList<MenuModel>()
-    menus.add(MenuModel(1, R.drawable.icon_notification,context.getString(R.string.notification)))
-    menus.add(MenuModel(2, R.drawable.icon_waiter,context.getString(R.string.waiter_list)))
-    menus.add(MenuModel(3, R.drawable.billicon,context.getString(R.string.paid_bills)))
-    menus.add(MenuModel(4, R.drawable.icon_logout,context.getString(R.string.logout)))
+    menus.add(MenuModel(1, R.drawable.icon_notification, context.getString(R.string.notification)))
+    menus.add(MenuModel(2, R.drawable.icon_waiter, context.getString(R.string.waiter_list)))
+    menus.add(MenuModel(3, R.drawable.billicon, context.getString(R.string.paid_bills)))
+    menus.add(MenuModel(4, R.drawable.icon_logout, context.getString(R.string.logout)))
     return menus
 }
 

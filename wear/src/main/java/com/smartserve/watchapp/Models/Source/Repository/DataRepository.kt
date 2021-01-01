@@ -1,10 +1,11 @@
 package com.smartserve.watchapp.Models.Source.Repository
 
-import android.content.Context
 import com.smartserve.watchapp.Models.DataModels.RequestModels.LoginRequestModel.LoginRequestModel
-import com.smartserve.watchapp.Models.DataModels.RequestModels.SignUpRequestModel.SignUpRequestModel
+import com.smartserve.watchapp.Models.DataModels.RequestModels.LogoutRequestModel.LogoutRequestModel
 import com.smartserve.watchapp.Models.DataModels.ResponseModels.*
 import com.smartserve.watchapp.Models.Source.ServerConnection.RetrofitClientInstance
+import com.smartserve.watchapp.Utils.GeneralUtils.AppConstants.Companion.ACTIVITY_NOTIFICATIONS
+import com.smartserve.watchapp.Utils.GeneralUtils.AppConstants.Companion.ACTIVITY_PAID_BILLS
 import com.smartserve.watchapp.Utils.GeneralUtils.SessionManager
 
 import com.smartserve.watchapp.Utils.NetworkUtils.ResultWrapper
@@ -27,29 +28,29 @@ class DataRepository(sessionManager: SessionManager, retrofitClientInstance: Ret
     }
 
 
-    suspend fun userSignUp(
-        signUpRequestModel: SignUpRequestModel
-    ): ResultWrapper<SignupResponseModel> {
+    suspend fun userLogout(
+        logoutRequestModel: LogoutRequestModel
+    ): ResultWrapper<LogoutResponseModel> {
         return safeApiCall(dispatcher) {
-            getApiService().signUpUser(signUpRequestModel)
+            getApiService().logoutUser(logoutRequestModel)
         }
     }
 
-    suspend fun getNotifications(): ResultWrapper<GetNotificationResponse> {
+    suspend fun getNotifications(currentDate:String): ResultWrapper<GetNotificationResponse> {
         return safeApiCall(dispatcher) {
-            getApiService().getNotifications()
+            getApiService().getNotifications(ACTIVITY_NOTIFICATIONS,currentDate)
         }
     }
 
     suspend fun getWaiterList(): ResultWrapper<GetWaiterListResponse> {
         return safeApiCall(dispatcher) {
-            getApiService().getWaiterList()
+            getApiService().getWaiterList(sessionManager.getRestaurantId())
         }
     }
 
-    suspend fun getPaidBills(): ResultWrapper<GetPaidBillResponse> {
+    suspend fun getPaidBills(currentDate:String): ResultWrapper<GetPaidBillResponse> {
         return safeApiCall(dispatcher) {
-            getApiService().getPaidBills()
+            getApiService().getPaidBills(ACTIVITY_PAID_BILLS,currentDate)
         }
     }
 

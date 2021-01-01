@@ -2,6 +2,5 @@ package com.smartserve.watchapp.Models.DataModels.RequestModels.LoginRequestMode
 
 data class LoginRequestModel(
     val device: Device,
-    val email: String,
-    val password: String
+    val pin: String
 )

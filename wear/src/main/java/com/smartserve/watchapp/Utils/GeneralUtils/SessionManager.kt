@@ -15,6 +15,7 @@ import com.smartserve.watchapp.Utils.GeneralUtils.AppConstants.Companion.PHONE_N
 import com.smartserve.watchapp.Utils.GeneralUtils.AppConstants.Companion.PREF_NAME
 import com.smartserve.watchapp.Utils.GeneralUtils.AppConstants.Companion.PROFILE_PIC
 import com.smartserve.watchapp.Utils.GeneralUtils.AppConstants.Companion.PROFILE_STATUS
+import com.smartserve.watchapp.Utils.GeneralUtils.AppConstants.Companion.REST_UUID
 import com.smartserve.watchapp.Utils.GeneralUtils.AppConstants.Companion.UNIQUE_CODE
 import com.smartserve.watchapp.Utils.GeneralUtils.AppConstants.Companion.USER_ID
 import com.smartserve.watchapp.Utils.GeneralUtils.AppConstants.Companion.USER_STATUS
@@ -48,6 +49,17 @@ class SessionManager {
 
     fun getUserId(): String {
         return pref.getString(USER_ID, "")!!
+    }
+
+    fun setRestaurantId(id: String) {
+        with(pref.edit()) {
+            putString(REST_UUID, id)
+            apply()
+        }
+    }
+
+    fun getRestaurantId(): String {
+        return pref.getString(REST_UUID, "")!!
     }
 
 
@@ -250,6 +262,7 @@ fun setUserStatus(user_status: String?) {
         setFCMToken("")
         setUserStatus("")
         setUniqueCode("")
+        setRestaurantId("")
     }
 
     fun setUser(user: UserModel) {
@@ -257,12 +270,13 @@ fun setUserStatus(user_status: String?) {
         setUserId(user.uuid)
         setName(user.name)
         setEmail(user.email)
-        setUniqueCode(user.unique_code)
         setLoggedIn(true)
         setFCMToken(user.access_token)
         setPhoneNumber(user.mobile_number)
         setPicture(user.avatar_src)
-        setUserStatus(user.user_status)
+        setAuthToken(user.access_token)
+        setRestaurantId(user.restaurant.uuid)
+
 
 
     }

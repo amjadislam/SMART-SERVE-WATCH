@@ -10,12 +10,10 @@ import com.smartserve.watchapp.R
 import com.smartserve.watchapp.Views.adapters.BaseAdapter
 import com.smartserve.watchapp.Views.dialog.ConfirmationDialog
 
-class MainActivity : BaseActivity(), BaseAdapter.OnItemClicker {
+class MainActivity : BaseActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    var navController: NavController? = null
-    var needBackMove: Boolean = false
-    var ivToolIcon: ImageView? = null
+
 
 
 
@@ -25,39 +23,14 @@ class MainActivity : BaseActivity(), BaseAdapter.OnItemClicker {
     }
 
 
-    override fun onItemClick(position: Int, data: Any) {
-        when (position) {
-            3 -> {
-                //                navController!!.navigate(R.id.changePasswordFragment)
-            }
-            5 -> {
-                // logout()
-            }
-        }
-    }
+
 
 
     override fun initViews() {
-
-
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
 
-    private fun logout() {
 
-        ConfirmationDialog("Are you sure to logout from app ?",
-            object : ConfirmationDialog.ConfirmationListener {
-                override fun isConfirmed(isConfirmed: Boolean) {
-                    if (isConfirmed) {
-                        sessionManager.logout()
-                    }
-                }
-            }).show(supportFragmentManager, "")
 
-    }
+
 }

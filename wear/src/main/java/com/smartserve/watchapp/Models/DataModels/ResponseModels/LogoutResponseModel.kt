@@ -5,7 +5,7 @@ import com.smartserve.watchapp.Models.DataModels.GeneralModels.UserModel.UserMod
 import com.smartserve.watchapp.Models.DataModels.UtilityModels.BaseResponse
 import java.io.Serializable
 
-data class SignupResponseModel(
+data class LogoutResponseModel(
 
-        val data: UserModel
-): BaseResponse(), Serializable
+    val data: Boolean
+) : BaseResponse(), Serializable
