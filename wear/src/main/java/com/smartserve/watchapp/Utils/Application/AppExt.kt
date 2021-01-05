@@ -380,7 +380,7 @@ fun Date.dateWithCurrentTimeZone(): String {
 
 
 fun Fragment.getCurrentDate(): String {
-    val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH)
+    val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
     val cal = Calendar.getInstance()
     return dateFormat.format(cal.time)
 }
@@ -412,7 +412,7 @@ fun EditText.getInt(): Int {
     return value
 }
 
-fun View.loadMenuItems():ArrayList<MenuModel>{
+fun View.loadMenuItems(): ArrayList<MenuModel> {
     val menus = ArrayList<MenuModel>()
     menus.add(MenuModel(1, R.drawable.icon_notification, context.getString(R.string.notification)))
     menus.add(MenuModel(2, R.drawable.icon_waiter, context.getString(R.string.waiter_list)))

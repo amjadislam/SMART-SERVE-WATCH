@@ -2,10 +2,16 @@ package com.smartserve.watchapp.Views.Services
 
 import android.app.PendingIntent
 import android.content.Intent
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.smartserve.watchapp.Models.DataModels.RequestModels.LoginRequestModel.Device
+import com.smartserve.watchapp.Models.Source.Repository.DataRepository
+import com.smartserve.watchapp.Models.Source.ServerConnection.RetrofitClientInstance
 import com.smartserve.watchapp.Utils.Application.SmartServeWatchApp
+import com.smartserve.watchapp.Utils.Application.getUniqueAndroidId
 import com.smartserve.watchapp.Utils.GeneralUtils.NotificationHelper
+import com.smartserve.watchapp.Utils.GeneralUtils.SessionManager
 import com.smartserve.watchapp.Views.activities.MainActivity
 import com.smartserve.watchapp.Views.activities.SplashActivity
 import com.smartserve.watchapp.Views.fragments.HomeFragment
@@ -117,7 +123,11 @@ class FCMService : FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         GlobalScope.launch {
-//             DataRepository(this@FCMService).updateFCMToken(token)
+            DataRepository(
+                SessionManager(applicationContext),
+                RetrofitClientInstance(applicationContext)
+            ).updateFcmToken(Device("android", token, applicationContext.getUniqueAndroidId())
+            )
         }
     }
 }

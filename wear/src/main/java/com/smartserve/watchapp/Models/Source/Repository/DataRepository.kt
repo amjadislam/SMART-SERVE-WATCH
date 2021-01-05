@@ -1,8 +1,10 @@
 package com.smartserve.watchapp.Models.Source.Repository
 
+import com.smartserve.watchapp.Models.DataModels.RequestModels.LoginRequestModel.Device
 import com.smartserve.watchapp.Models.DataModels.RequestModels.LoginRequestModel.LoginRequestModel
 import com.smartserve.watchapp.Models.DataModels.RequestModels.LogoutRequestModel.LogoutRequestModel
 import com.smartserve.watchapp.Models.DataModels.ResponseModels.*
+import com.smartserve.watchapp.Models.DataModels.UtilityModels.BaseResponse
 import com.smartserve.watchapp.Models.Source.ServerConnection.RetrofitClientInstance
 import com.smartserve.watchapp.Utils.GeneralUtils.AppConstants.Companion.ACTIVITY_NOTIFICATIONS
 import com.smartserve.watchapp.Utils.GeneralUtils.AppConstants.Companion.ACTIVITY_PAID_BILLS
@@ -38,7 +40,7 @@ class DataRepository(sessionManager: SessionManager, retrofitClientInstance: Ret
 
     suspend fun getNotifications(currentDate:String): ResultWrapper<GetNotificationResponse> {
         return safeApiCall(dispatcher) {
-            getApiService().getNotifications(ACTIVITY_NOTIFICATIONS,currentDate)
+            getApiService().getNotifications("watch_new_order",currentDate)
         }
     }
 
@@ -50,9 +52,14 @@ class DataRepository(sessionManager: SessionManager, retrofitClientInstance: Ret
 
     suspend fun getPaidBills(currentDate:String): ResultWrapper<GetPaidBillResponse> {
         return safeApiCall(dispatcher) {
-            getApiService().getPaidBills(ACTIVITY_PAID_BILLS,currentDate)
+            getApiService().getPaidBills("bill_paid",currentDate)
         }
     }
 
+    suspend fun updateFcmToken(device: Device): ResultWrapper<BaseResponse> {
+        return safeApiCall(dispatcher) {
+            getApiService().updateFCMToken(device)
+        }
+    }
 
 }

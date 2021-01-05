@@ -43,7 +43,11 @@ class SignInFragment : BaseFragment(R.layout.activity_login) {
                 showToast("Login code required !!")
             } else {
                 val loginRequestModel = LoginRequestModel(
-                    Device("android", "", requireContext().getUniqueAndroidId()),
+                    Device(
+                        "android",
+                        sessionManager.getFCMToken(),
+                        requireContext().getUniqueAndroidId()
+                    ),
                     editText_loginCode.getString()
                 )
                 viewModel.loginUser(loginRequestModel)
