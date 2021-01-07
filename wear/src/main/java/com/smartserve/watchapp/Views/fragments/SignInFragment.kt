@@ -26,7 +26,6 @@ class SignInFragment : BaseFragment(R.layout.activity_login) {
         {
             userLiveData.observe(viewLifecycleOwner, Observer {
                 it.getContentIfNotHandled()?.let {
-
                     sessionManager.setUser(it)
                     (requireActivity() as BaseActivity).gotoMainActivity()
                 }

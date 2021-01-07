@@ -38,6 +38,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), BaseAdapter.OnItemCli
                     (requireActivity() as BaseActivity).gotoLoginActivity()
                 }
             }
+
         }
     }
 

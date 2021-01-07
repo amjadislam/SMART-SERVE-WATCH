@@ -6,10 +6,12 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.smartserve.watchapp.Models.DataModels.RequestModels.LoginRequestModel.Device
+import com.smartserve.watchapp.Models.DataModels.RequestModels.LoginRequestModel.Devices
 import com.smartserve.watchapp.Models.Source.Repository.DataRepository
 import com.smartserve.watchapp.Models.Source.ServerConnection.RetrofitClientInstance
 import com.smartserve.watchapp.Utils.Application.SmartServeWatchApp
 import com.smartserve.watchapp.Utils.Application.getUniqueAndroidId
+import com.smartserve.watchapp.Utils.GeneralUtils.AppConstants
 import com.smartserve.watchapp.Utils.GeneralUtils.NotificationHelper
 import com.smartserve.watchapp.Utils.GeneralUtils.SessionManager
 import com.smartserve.watchapp.Views.activities.MainActivity
@@ -36,67 +38,33 @@ class FCMService : FirebaseMessagingService() {
         super.onMessageReceived(remoteMessage)
 
         requestID = System.currentTimeMillis().toInt()
-        handleNotificationData()
         remoteMessage?.let {
-//            remoteMessage.notification?.let {
-//                title = remoteMessage.notification!!.title!!
-//                message = remoteMessage.notification!!.body!!
-//            }
-            if (remoteMessage.data != null) {
-                // TAG = remoteMessage.data["type"]!!
-                //eventItem = EventItem(TAG!!)
+            remoteMessage.notification?.let {
+                title = remoteMessage.notification!!.title!!
+                message = remoteMessage.notification!!.body!!
             }
         }
+        handleNotificationData()
 
     }
 
-    fun handleNotificationData() {
+    private fun handleNotificationData() {
 
         if ((applicationContext as SmartServeWatchApp).getCurrentActivity() != null
             && (applicationContext as SmartServeWatchApp).getCurrentActivity() is MainActivity
         ) {
-            createBookingOrInvitation()
+            postEventToCurrentScreen()
             sendNotification()
-            when (TAG) {
-                /*NEW_ORDER_TYPE -> {
-                    if (((applicationContext as App).getCurrentActivity() as BaseActivity).getCurrentFragment() is HomeFragment) {
-                        EventBus.getDefault().post(EventItem(TAG))
-                    } else {
-                        sendNotification()
-                    }
-                }
-
-                ORDER_CANCEL -> {
-                    if (((applicationContext as App).getCurrentActivity() as BaseActivity).getCurrentFragment() is BidsHistoryFragment) {
-                        EventBus.getDefault().post(EventItem(TAG))
-                    } else {
-                        sendNotification()
-                    }
-                }
-
-                ORDER_APPROVE -> {
-                    if (((applicationContext as App).getCurrentActivity() as BaseActivity).getCurrentFragment() is BidsHistoryFragment) {
-                        AppInstance.getInstance().accepted = true
-                        EventBus.getDefault().post(EventItem(TAG))
-                    } else {
-                        sendNotification()
-                    }
-                }
-                else -> {
-                    sendNotification()
-                }*/
-
-            }
         }
 
     }
 
 
-    fun sendNotification() {
+   private fun sendNotification() {
 
         val notificationHelper = NotificationHelper(this)
         var notificationIntent = Intent(applicationContext, SplashActivity::class.java)
-//         notificationIntent.putExtra("data", eventItem)
+       //notificationIntent.putExtra("data", eventItem)
         notificationIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         var contentIntent = PendingIntent.getActivity(
             this,
@@ -112,7 +80,7 @@ class FCMService : FirebaseMessagingService() {
 
     }
 
-    fun createBookingOrInvitation() {
+    fun postEventToCurrentScreen() {
         val fragment =
             ((applicationContext as SmartServeWatchApp).getCurrentActivity() as MainActivity).getCurrentFragment()
         if (fragment is NotificationFragment || fragment is PaidBillFragment || fragment is WaiterListFragment) {
@@ -126,8 +94,8 @@ class FCMService : FirebaseMessagingService() {
             DataRepository(
                 SessionManager(applicationContext),
                 RetrofitClientInstance(applicationContext)
-            ).updateFcmToken(Device("android", token, applicationContext.getUniqueAndroidId())
-            )
+            ).updateFcmToken(Devices( Device(AppConstants.DEVICE_TYPE, token, this@FCMService.getUniqueAndroidId())
+            ))
         }
     }
 }

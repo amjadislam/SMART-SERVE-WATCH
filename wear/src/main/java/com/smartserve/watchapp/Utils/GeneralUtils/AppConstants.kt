@@ -8,6 +8,7 @@ class AppConstants {
         const val SIGNIN_API = "user/auth/staff/authenticate/pin"
         const val LOGOUT_API = "user/auth/logout"
         const val GET_NOTIFICATION = "smartwatch/notification"
+        const val READ_NOTIFICATION = "smartwatch/notification/{notification_uuid}"
         const val GET_WAITERS = "smartwatch/staff/{rest_uuid}"
         const val PAID_BILLS = "smartwatch/notification"
         const val UPDATE_FCM_TOKEN = "user/fcm/token"
@@ -27,7 +28,7 @@ class AppConstants {
 
         //ACTIVITY TYPES
         const val ACTIVITY_WAITER_LIST="Kitchen to Waiter"
-        const val ACTIVITY_PAID_BILLS="Bill paid"
+        const val ACTIVITY_PAID_BILLS="bill_paid"
         const val ACTIVITY_NOTIFICATIONS="watch_new_order"
 
 

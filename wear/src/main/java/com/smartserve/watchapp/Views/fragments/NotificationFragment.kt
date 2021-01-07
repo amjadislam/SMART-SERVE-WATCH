@@ -7,6 +7,7 @@ import com.smartserve.watchapp.Models.DataModels.GeneralModels.NotificationItem
 import com.smartserve.watchapp.R
 import com.smartserve.watchapp.Utils.Application.getCurrentDate
 import com.smartserve.watchapp.Utils.Application.showAlertDialog
+import com.smartserve.watchapp.Utils.Application.showToast
 import com.smartserve.watchapp.Views.adapters.BaseAdapter
 import com.smartserve.watchapp.Views.adapters.NotificationAdapter
 import kotlinx.android.synthetic.main.fragment_notification.*
@@ -45,6 +46,11 @@ class NotificationFragment : BaseFragment(R.layout.fragment_notification),
                     }
                 }
             }
+            notificationReadLiveData.observe(viewLifecycleOwner){
+                it.getContentIfNotHandled()?.let {
+                    showToast(it.message)
+                }
+            }
             getNotifications(getCurrentDate())
         }
 
@@ -67,6 +73,7 @@ class NotificationFragment : BaseFragment(R.layout.fragment_notification),
     }
 
     override fun onItemClick(position: Int, data: Any) {
-
+        val notificationData=data as NotificationItem
+        viewModel.readNotifications(notificationData.id)
     }
 }
