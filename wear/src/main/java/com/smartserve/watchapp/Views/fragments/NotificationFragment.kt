@@ -49,6 +49,7 @@ class NotificationFragment : BaseFragment(R.layout.fragment_notification),
             notificationReadLiveData.observe(viewLifecycleOwner){
                 it.getContentIfNotHandled()?.let {
                     showToast(it.message)
+                    getNotifications(getCurrentDate())
                 }
             }
             getNotifications(getCurrentDate())

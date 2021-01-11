@@ -12,7 +12,7 @@ class NotificationAdapter(var data: ArrayList<NotificationItem>, var callback: O
         this.tvTableName.text="Table # "+data.table_name
         this.tvMessage.text=data.message
         this.tvTitle.text=data.created_at
-        this.rootView.setOnClickListener {
+        this.rlRootView.setOnClickListener {
             callback.onItemClick(0,data)
         }
     }
