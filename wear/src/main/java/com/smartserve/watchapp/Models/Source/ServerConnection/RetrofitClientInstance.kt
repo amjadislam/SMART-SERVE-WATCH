@@ -18,7 +18,8 @@ class RetrofitClientInstance(ctx: Context) {
     var context: Context
 
       // val BASE_URL = "http://mashghol.com/smartseve-api/public/api/v1/"
-    val BASE_URL = "https://smartserveapp.com/api/v1/"
+//    val BASE_URL = "https://smartserveapp.com/api/v1/"
+    val BASE_URL = "https://api.connectsmartserve.com/api/v1/"
 
     init {
         context = ctx
