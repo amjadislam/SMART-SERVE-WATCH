@@ -64,7 +64,7 @@ class FCMService : FirebaseMessagingService() {
 
         val notificationHelper = NotificationHelper(this)
         var notificationIntent = Intent(applicationContext, SplashActivity::class.java)
-       //notificationIntent.putExtra("data", eventItem)
+//       notificationIntent.putExtra("data", eventItem)
         notificationIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         var contentIntent = PendingIntent.getActivity(
             this,
