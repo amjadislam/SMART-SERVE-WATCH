@@ -56,6 +56,7 @@ class PaidBillFragment : BaseFragment(R.layout.fragment_paid_bill), BaseAdapter.
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     open fun onMessageEvent(event: String) {
+        //
         Log.e("notification", "received")
         viewModel.getNotifications(getCurrentDate())
     }
