@@ -4,16 +4,20 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.ContentResolver
 import android.content.Context
 import android.content.ContextWrapper
 import android.graphics.Color
+import android.media.AudioAttributes
 import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.smartserve.watchapp.R
 
-class NotificationHelper constructor(context: Context) : ContextWrapper(context) {
+
+class NotificationHelper constructor(var context: Context) : ContextWrapper(context) {
 
     private val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -34,6 +38,11 @@ class NotificationHelper constructor(context: Context) : ContextWrapper(context)
     @RequiresApi(api = Build.VERSION_CODES.O)
     private fun createChannels() {
         val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        val soundUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + context.getPackageName() + "/" + R.raw.notification_sound);
+        val audioAttributes = AudioAttributes.Builder()
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .setUsage(AudioAttributes.USAGE_ALARM)
+            .build()
         val notificationChannels = mutableListOf<NotificationChannel>()
 
         // Building message notification channel
@@ -58,15 +67,14 @@ class NotificationHelper constructor(context: Context) : ContextWrapper(context)
         commentNotificationChannel.enableLights(true)
         commentNotificationChannel.lightColor = Color.RED
         commentNotificationChannel.setShowBadge(true)
-        commentNotificationChannel.setSound(uri, null)
+        commentNotificationChannel.setSound(uri  , null)
         commentNotificationChannel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
         notificationChannels.add(commentNotificationChannel)
 
         // Building default notification channel
-
         val defaultNotificationChannel = NotificationChannel(
             DEFAULT_NOTIFICATION_CHANNEL,
-            DEFAULT_NOTIFICATION_TITLE, NotificationManager.IMPORTANCE_LOW
+            DEFAULT_NOTIFICATION_TITLE, NotificationManager.IMPORTANCE_HIGH
         )
         defaultNotificationChannel.setShowBadge(true)
         defaultNotificationChannel.setSound(uri, null)
@@ -74,7 +82,12 @@ class NotificationHelper constructor(context: Context) : ContextWrapper(context)
         notificationManager.createNotificationChannels(notificationChannels)
     }
 
-    fun createNotificationBuilder(title: String, body: String, cancelAble: Boolean = true, pendingIntent: PendingIntent? = null, channelId: String = DEFAULT_NOTIFICATION_CHANNEL
+    fun createNotificationBuilder(
+        title: String,
+        body: String,
+        cancelAble: Boolean = true,
+        pendingIntent: PendingIntent? = null,
+        channelId: String = DEFAULT_NOTIFICATION_CHANNEL
     ): Notification.Builder {
         val builder: Notification.Builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             Notification.Builder(applicationContext, channelId)

@@ -5,9 +5,7 @@ import androidx.lifecycle.observe
 import com.rapidzz.garageapp.ViewModels.MainFunctionsViewModel
 import com.smartserve.watchapp.Models.DataModels.GeneralModels.WaiterModels.WaitStaff
 import com.smartserve.watchapp.R
-import com.smartserve.watchapp.Utils.Application.getCurrentDate
-import com.smartserve.watchapp.Utils.Application.showAlertDialog
-import com.smartserve.watchapp.Utils.Application.showToast
+import com.smartserve.watchapp.Utils.Application.*
 import com.smartserve.watchapp.Views.adapters.BaseAdapter
 import com.smartserve.watchapp.Views.adapters.WaiterListAdapter
 import kotlinx.android.synthetic.main.fragment_waiter_list.*
@@ -20,10 +18,8 @@ class WaiterListFragment : BaseFragment(R.layout.fragment_waiter_list), BaseAdap
 
 
     val viewModel: MainFunctionsViewModel by viewModel()
-
     var waitersList = ArrayList<WaitStaff>()
     var waiterListAdapter: WaiterListAdapter? = null
-
 
     override fun initViews() {
         waiterListAdapter = WaiterListAdapter(waitersList, this)
@@ -38,15 +34,15 @@ class WaiterListFragment : BaseFragment(R.layout.fragment_waiter_list), BaseAdap
             setupGeneralViewModel(this)
             waiterResponseLiveData.observe(viewLifecycleOwner) {
                 it.getContentIfNotHandled()?.let {
-                    showToast(it.message)
                     waitersList.clear()
                     it.data.forEach {
                         waitersList.addAll(it.wait_staff)
                     }
-                    waiterListAdapter?.notifyDataSetChanged()
-
-                    if (waitersList.isNullOrEmpty()) {
-                        showAlertDialog("No waiters found")
+                    if (waitersList.isNullOrEmpty().not()) {
+                        placeholder.gone()
+                        waiterListAdapter?.notifyDataSetChanged()
+                    }else{
+                        placeholder.visible()
                     }
                 }
             }

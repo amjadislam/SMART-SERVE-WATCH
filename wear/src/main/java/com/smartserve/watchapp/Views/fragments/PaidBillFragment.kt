@@ -5,12 +5,13 @@ import androidx.lifecycle.observe
 import com.rapidzz.garageapp.ViewModels.MainFunctionsViewModel
 import com.smartserve.watchapp.Models.DataModels.GeneralModels.NotificationItem
 import com.smartserve.watchapp.R
-import com.smartserve.watchapp.Utils.Application.getCurrentDate
-import com.smartserve.watchapp.Utils.Application.showAlertDialog
+import com.smartserve.watchapp.Utils.Application.*
 import com.smartserve.watchapp.Views.adapters.BaseAdapter
 import com.smartserve.watchapp.Views.adapters.NotificationAdapter
 import com.smartserve.watchapp.Views.adapters.PaidBillAdapter
+import kotlinx.android.synthetic.main.fragment_notification.*
 import kotlinx.android.synthetic.main.fragment_paid_bill.*
+import kotlinx.android.synthetic.main.fragment_paid_bill.placeholder
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -33,30 +34,30 @@ class PaidBillFragment : BaseFragment(R.layout.fragment_paid_bill), BaseAdapter.
 
 
     override fun attachViewModel() {
-
         with(viewModel)
         {
             setupGeneralViewModel(this)
-            paidBillsResponseLiveData.observe(viewLifecycleOwner) {
+            notificationResponseLiveData.observe(viewLifecycleOwner) {
                 it.getContentIfNotHandled()?.let {
-                    bills.clear()
-                    bills.addAll(it.data)
-                    billPaidAdapter?.notifyDataSetChanged()
-                    if (bills.isNullOrEmpty()) {
-                        showAlertDialog("No paid bill notifications found")
-                    }
 
+                    bills.clear()
+                    bills.addAll(it.data.filter { it.activity_type.equals("watch_new_order", true) })
+                    if (bills.isNullOrEmpty().not()) {
+                        placeholder.gone()
+                        billPaidAdapter?.notifyDataSetChanged()
+                    }else{
+                        placeholder.visible()
+                    }
                 }
             }
-
-            getPaidBills(getCurrentDate())
+            getNotifications(getCurrentDate())
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     open fun onMessageEvent(event: String) {
         Log.e("notification", "received")
-        viewModel.getPaidBills(getCurrentDate())
+        viewModel.getNotifications(getCurrentDate())
     }
 
     override fun onStart() {

@@ -32,6 +32,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.DateFormat
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -372,6 +373,26 @@ fun String.getDateWithCurrentTimeZone(): String {
     return "" + date?.dateWithCurrentTimeZone()
 }
 
+fun String.dateToFullMothName(): String {
+    var timeString = ""
+    val newFormat = "dd MMM, yyyy - hh:mm a"
+    val dateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ssZ", Locale.ENGLISH);
+    var myDate: Date? = null
+    try {
+        myDate = dateFormat.parse(this)
+        val timeFormat = SimpleDateFormat(newFormat)
+        myDate?.let {
+            timeString= timeFormat.format(myDate)
+        }
+
+    } catch (e: ParseException) {
+        e.printStackTrace()
+    }
+//    val timeFormat = SimpleDateFormat(newFormat)
+//    timeString = "" + timeFormat.format(myDate)
+    return timeString
+}
+
 fun Date.dateWithCurrentTimeZone(): String {
     val sdf = SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
     sdf.setTimeZone(TimeZone.getDefault());
@@ -414,9 +435,9 @@ fun EditText.getInt(): Int {
 
 fun View.loadMenuItems(): ArrayList<MenuModel> {
     val menus = ArrayList<MenuModel>()
-    menus.add(MenuModel(1, R.drawable.icon_notification, context.getString(R.string.notification)))
-    menus.add(MenuModel(2, R.drawable.icon_waiter, context.getString(R.string.waiter_list)))
-    menus.add(MenuModel(3, R.drawable.billicon, context.getString(R.string.paid_bills)))
+    menus.add(MenuModel(1, R.drawable.ic_notifications_list, context.getString(R.string.notification)))
+    menus.add(MenuModel(2, R.drawable.ic_waiter_list, context.getString(R.string.waiter_list)))
+    menus.add(MenuModel(3, R.drawable.ic_paid_bills, context.getString(R.string.paid_bills)))
     menus.add(MenuModel(4, R.drawable.icon_logout, context.getString(R.string.logout)))
     return menus
 }

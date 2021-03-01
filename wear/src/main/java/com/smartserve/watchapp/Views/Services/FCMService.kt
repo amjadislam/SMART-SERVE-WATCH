@@ -53,8 +53,14 @@ class FCMService : FirebaseMessagingService() {
         if ((applicationContext as SmartServeWatchApp).getCurrentActivity() != null
             && (applicationContext as SmartServeWatchApp).getCurrentActivity() is MainActivity
         ) {
-            postEventToCurrentScreen()
-            sendNotification()
+            val fragment =
+                ((applicationContext as SmartServeWatchApp).getCurrentActivity() as MainActivity).getCurrentFragment()
+            if (fragment is NotificationFragment || fragment is PaidBillFragment || fragment is WaiterListFragment) {
+                EventBus.getDefault().post("")
+            }else{
+                sendNotification()
+            }
+
         }
 
     }

@@ -1,10 +1,12 @@
 package com.smartserve.watchapp.Views.activities
 
+import android.util.Log
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import android.widget.ImageView
 import androidx.navigation.NavController
+import com.google.firebase.iid.FirebaseInstanceId
 import com.rapidzz.garageapp.ViewModels.ProfileViewModel
 import com.smartserve.watchapp.Models.DataModels.RequestModels.LoginRequestModel.Device
 import com.smartserve.watchapp.Models.DataModels.RequestModels.LoginRequestModel.LoginRequestModel
@@ -28,8 +30,14 @@ class LoginActivity : BaseActivity() {
 
 
     override fun initViews() {
-
+        getFCMToken()
     }
-
+    private fun getFCMToken()
+    {
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
+            Log.d("fcm_token",it.token )
+            sessionManager.setFCMToken(it.token)
+        }
+    }
 
 }

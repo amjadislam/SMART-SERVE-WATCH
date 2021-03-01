@@ -2,17 +2,176 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@color/colorWhite"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/rvMenu"
-        tools:itemCount="4"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/row_main_menu_list"/>
+   <androidx.core.widget.NestedScrollView
+       android:padding="@dimen/_10sdp"
+       android:layout_width="match_parent"
+       android:paddingTop="@dimen/_20sdp"
+       android:paddingBottom="@dimen/_20sdp"
+       android:layout_height="wrap_content">
+       <LinearLayout
+           android:orientation="vertical"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <androidx.cardview.widget.CardView
+               android:layout_width="match_parent"
+               android:layout_margin="@dimen/_10sdp"
+               app:cardCornerRadius="@dimen/_30sdp"
+               app:cardElevation="@dimen/_4sdp"
+               app:cardBackgroundColor="@color/colorWhite"
+               android:layout_height="wrap_content">
+               <LinearLayout
+                   android:id="@+id/llNotifications"
+                   android:background="@drawable/linearlayot_selector"
+                   android:orientation="horizontal"
+                   android:weightSum="1"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+                   <TextView
+                       android:id="@+id/tvNotificationTitle"
+                       android:layout_weight=".8"
+                       android:layout_width="0dp"
+                       android:layout_height="@dimen/_50sdp"
+                       android:textSize="@dimen/_18sdp"
+                       android:gravity="start|center"
+                       android:textColor="@color/colorDarkGray"
+                       android:layout_gravity="start|center"
+                       android:paddingLeft="@dimen/_30sdp"
+                       android:text="Notifications"
+                       android:textStyle="bold" />
+                   <ImageView
+                       android:id="@+id/ivNotification"
+                       android:layout_weight=".2"
+                       android:layout_gravity="center"
+                       android:src="@drawable/ic_notifications_black"
+                       android:layout_width="0dp"
+                       android:layout_height="@dimen/_35sdp" />
+               </LinearLayout>
+           </androidx.cardview.widget.CardView>
+           <androidx.cardview.widget.CardView
+               android:layout_width="match_parent"
+               android:layout_margin="@dimen/_10sdp"
+               app:cardCornerRadius="@dimen/_30sdp"
+               app:cardElevation="@dimen/_4sdp"
+               app:cardBackgroundColor="@color/colorWhite"
+               android:layout_height="wrap_content">
+               <LinearLayout
+                   android:id="@+id/llWaiterList"
+                   android:background="@drawable/linearlayot_selector"
+                   android:orientation="horizontal"
+                   android:weightSum="1"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+                   <TextView
+                       android:id="@+id/tvWaiterListTitle"
+                       android:layout_weight=".8"
+                       android:layout_width="0dp"
+                       android:layout_height="@dimen/_50sdp"
+                       android:textSize="@dimen/_18sdp"
+                       android:gravity="start|center"
+                       android:textColor="@color/colorDarkGray"
+                       android:layout_gravity="start|center"
+                       android:paddingLeft="@dimen/_30sdp"
+                       android:text="Waiter List"
+                       android:textStyle="bold" />
+                   <ImageView
+                       android:id="@+id/ivWaiterList"
+                       android:layout_weight=".2"
+                       android:layout_gravity="center"
+                       android:src="@drawable/ic_waiter_list_black"
+                       android:layout_width="0dp"
+                       android:layout_height="@dimen/_35sdp" />
+               </LinearLayout>
+           </androidx.cardview.widget.CardView>
+           <androidx.cardview.widget.CardView
+               android:layout_width="match_parent"
+               android:layout_margin="@dimen/_10sdp"
+               app:cardCornerRadius="@dimen/_30sdp"
+               app:cardElevation="@dimen/_4sdp"
+               app:cardBackgroundColor="@color/colorWhite"
+               android:layout_height="wrap_content">
+               <LinearLayout
+                   android:id="@+id/llPaidBills"
+                   android:background="@drawable/linearlayot_selector"
+                   android:orientation="horizontal"
+                   android:weightSum="1"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+                   <TextView
+                       android:id="@+id/tvPaidBillsTitle"
+                       android:layout_weight=".8"
+                       android:textColor="@color/colorDarkGray"
+                       android:layout_width="0dp"
+                       android:layout_height="@dimen/_50sdp"
+                       android:textSize="@dimen/_18sdp"
+                       android:gravity="start|center"
+                       android:layout_gravity="start|center"
+                       android:paddingLeft="@dimen/_30sdp"
+                       android:text="Paid Bills"
+                       android:textStyle="bold" />
+                   <ImageView
+                       android:id="@+id/ivPaidBills"
+                       android:layout_weight=".2"
+                       android:layout_gravity="center"
+                       android:src="@drawable/ic_paid_billd_back"
+                       android:layout_width="0dp"
+                       android:layout_height="@dimen/_35sdp" />
+               </LinearLayout>
+           </androidx.cardview.widget.CardView>
+           <androidx.cardview.widget.CardView
+               android:layout_width="match_parent"
+               android:layout_margin="@dimen/_10sdp"
+               app:cardCornerRadius="@dimen/_30sdp"
+               app:cardElevation="@dimen/_4sdp"
+               app:cardBackgroundColor="@color/colorWhite"
+               android:layout_height="wrap_content">
+               <LinearLayout
+                   android:id="@+id/llLogout"
+                   android:background="@drawable/linearlayot_selector"
+                   android:orientation="horizontal"
+                   android:weightSum="1"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+                   <TextView
+                       android:id="@+id/tvLogoutTitle"
+                       android:layout_weight=".8"
+                       android:layout_width="0dp"
+                       android:textColor="@color/colorDarkGray"
+                       android:layout_height="@dimen/_50sdp"
+                       android:textSize="@dimen/_18sdp"
+                       android:gravity="start|center"
+                       android:layout_gravity="start|center"
+                       android:paddingLeft="@dimen/_30sdp"
+                       android:text="Logout"
+                       android:textStyle="bold" />
+                   <ImageView
+                       android:id="@+id/ivLogout"
+                       android:layout_weight=".2"
+                       android:layout_gravity="center"
+                       android:src="@drawable/icon_logout"
+                       android:layout_width="0dp"
+                       android:layout_height="@dimen/_35sdp" />
+               </LinearLayout>
+           </androidx.cardview.widget.CardView>
+           <androidx.recyclerview.widget.RecyclerView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/rvMenu"
+               tools:itemCount="4"
+               android:visibility="gone"
+               android:nestedScrollingEnabled="false"
+               android:layout_gravity="center"
+               android:orientation="vertical"
+               app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+               tools:listitem="@layout/row_main_menu_list"/>
 
+       </LinearLayout>
+
+   </androidx.core.widget.NestedScrollView>
 </LinearLayout>

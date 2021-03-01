@@ -3,37 +3,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorWhite">
 
 
-        <EditText
-            android:id="@+id/editText_loginCode"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:maxLength="5"
-            android:textSize="26sp"
-            android:inputType="number"
-            android:layout_centerInParent="true"
-            android:layout_above="@+id/btnSignIn"
-            android:hint="@string/enter_code"
-            android:background="@color/colorWhite"
-            android:textColorHint="@color/colorBlack"
-            android:textColor="@color/colorBlack" />
+      <androidx.cardview.widget.CardView
+          android:layout_width="match_parent"
+          android:layout_margin="@dimen/_10sdp"
+          app:cardCornerRadius="@dimen/_30sdp"
+          app:cardElevation="@dimen/_10sdp"
+          android:layout_centerInParent="true"
+          app:cardBackgroundColor="@color/colorWhite"
+          android:layout_height="wrap_content">
+          <EditText
+              android:id="@+id/editText_loginCode"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/_50sdp"
+              android:maxLength="5"
+              android:textAlignment="center"
+              android:textSize="26sp"
+              android:background="@null"
+              android:inputType="number"
+              android:layout_centerInParent="true"
+              android:layout_above="@+id/btnSignIn"
+              android:hint="@string/enter_code"
+              android:textColorHint="@color/colorBlack"
+              android:textColor="@color/colorBlack" />
+      </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/btnSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|bottom"
         android:layout_marginTop="5dp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:layout_alignParentBottom="true"
         android:minEms="10"
         android:gravity="center"
         android:text="@string/Login"
+        android:textStyle="bold"
         android:textSize="24sp"
         android:textColor="@color/colorWhite" />
 

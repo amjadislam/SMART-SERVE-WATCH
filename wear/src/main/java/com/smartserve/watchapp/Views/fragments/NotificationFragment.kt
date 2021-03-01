@@ -5,9 +5,7 @@ import androidx.lifecycle.observe
 import com.rapidzz.garageapp.ViewModels.MainFunctionsViewModel
 import com.smartserve.watchapp.Models.DataModels.GeneralModels.NotificationItem
 import com.smartserve.watchapp.R
-import com.smartserve.watchapp.Utils.Application.getCurrentDate
-import com.smartserve.watchapp.Utils.Application.showAlertDialog
-import com.smartserve.watchapp.Utils.Application.showToast
+import com.smartserve.watchapp.Utils.Application.*
 import com.smartserve.watchapp.Views.adapters.BaseAdapter
 import com.smartserve.watchapp.Views.adapters.NotificationAdapter
 import kotlinx.android.synthetic.main.fragment_notification.*
@@ -40,9 +38,11 @@ class NotificationFragment : BaseFragment(R.layout.fragment_notification),
                 it.getContentIfNotHandled()?.let {
                     notifications.clear()
                     notifications.addAll(it.data)
-                    notificationAdapter?.notifyDataSetChanged()
-                    if (notifications.isNullOrEmpty()) {
-                        showAlertDialog("No notifications found")
+                    if (notifications.isNullOrEmpty().not()) {
+                        placeholder.gone()
+                        notificationAdapter?.notifyDataSetChanged()
+                    }else{
+                        placeholder.visible()
                     }
                 }
             }

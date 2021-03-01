@@ -2,6 +2,8 @@ package com.smartserve.watchapp.Utils.Application
 
 import android.app.Activity
 import android.app.Application
+import android.content.Context
+import androidx.multidex.MultiDex
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -23,6 +25,10 @@ class SmartServeWatchApp: Application() {
         return mCurrentActivity
     }
 
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
     fun setCurrentActivity(mCurrentActivity: Activity?) {
         this.mCurrentActivity = mCurrentActivity
     }

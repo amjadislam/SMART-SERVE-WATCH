@@ -24,14 +24,10 @@ class AppConstants {
         //EXTRA CONSTANTS
         const val DEVICE_TYPE = "android"
 
-
-
         //ACTIVITY TYPES
         const val ACTIVITY_WAITER_LIST="Kitchen to Waiter"
-        const val ACTIVITY_PAID_BILLS="bill_paid"
+        const val ACTIVITY_PAID_BILLS="smart_call"
         const val ACTIVITY_NOTIFICATIONS="watch_new_order"
-
-
 
         // Preference name
 
@@ -53,7 +49,8 @@ class AppConstants {
         const val LAST_NAME = "last_name"
         const val PROFILE_STATUS = "PROFILE_STATUS"
 
-
+        // notification type
+        const val WATCH_NEW_ORDER = "watch_new_order"
 
 
 

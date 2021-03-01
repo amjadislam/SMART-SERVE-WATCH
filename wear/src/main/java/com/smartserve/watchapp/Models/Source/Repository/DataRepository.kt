@@ -60,7 +60,7 @@ class DataRepository(sessionManager: SessionManager, retrofitClientInstance: Ret
 
     suspend fun getPaidBills(currentDate:String): ResultWrapper<GetPaidBillResponse> {
         return safeApiCall(dispatcher) {
-            getApiService().getPaidBills(ACTIVITY_PAID_BILLS,currentDate)
+            getApiService().getPaidBills("",currentDate)
         }
     }
 

@@ -1,5 +1,6 @@
 package com.smartserve.watchapp.Views.activities
 
+import android.util.Log
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -38,6 +39,8 @@ class MainActivity : BaseActivity() {
             if(it.isSuccessful)
             {
                 val token=it.result.token
+                sessionManager.setFCMToken(it.result.token)
+                Log.d("token", token)
                 GlobalScope.launch {
                     DataRepository(sessionManager, RetrofitClientInstance(this@MainActivity)).updateFcmToken(
                         Devices(Device(AppConstants.DEVICE_TYPE, token, this@MainActivity.getUniqueAndroidId())))

@@ -25,12 +25,12 @@ abstract class BaseAdapter constructor(
         holder.itemView.setOnClickListener {
             onItemClicker.onItemClick(position,itemList[position])
         }
-        holder.itemView.bind(item)
+        holder.itemView.bind(item,position)
     }
 
 
 
-    protected open fun View.bind(item: Any) {
+    protected open fun View.bind(item: Any, position: Int) {
     }
 
     class Holder(itemView: View) : RecyclerView.ViewHolder(itemView)

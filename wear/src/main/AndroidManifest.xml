@@ -59,9 +59,6 @@
 
 
 
-
-
-
         <activity
             android:name=".Views.activities.SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >

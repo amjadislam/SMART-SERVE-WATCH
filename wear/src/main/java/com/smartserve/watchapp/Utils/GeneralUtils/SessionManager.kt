@@ -266,7 +266,6 @@ fun setUserStatus(user_status: String?) {
     }
 
     fun setUser(user: UserModel) {
-
         setUserId(user.uuid)
         setName(user.name)
         setEmail(user.email)
@@ -276,9 +275,6 @@ fun setUserStatus(user_status: String?) {
         setPicture(user.avatar_src)
         setAuthToken(user.access_token)
         setRestaurantId(user.restaurant.uuid)
-
-
-
     }
 
     fun getLocale(): String {
