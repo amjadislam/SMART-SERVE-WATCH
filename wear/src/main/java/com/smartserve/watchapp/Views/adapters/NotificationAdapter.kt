@@ -16,10 +16,12 @@ class NotificationAdapter(var data: ArrayList<NotificationItem>, var callback: O
         dateTimeUnit =  DateTimeUtils()
         this.tvTableName.text="Table # "+data.table_name
         this.tvMessage.text=data.message
-        var date = data.created_at.substring(0,10)
-        var time = data.created_at.substring(11,20)
-        var formattedDate = data.created_at.dateToFullMothName()
-        this.tvTitle.text=formattedDate
+        if(data.created_at.isNullOrEmpty()||data.created_at.equals("")){
+            this.tvTitle.text="N/A"
+        }else{
+            var formattedDate = data.created_at.dateToFullMothName()
+            this.tvTitle.text=formattedDate
+        }
         this.rlRootView.setOnClickListener {
             callback.onItemClick(0,data)
         }

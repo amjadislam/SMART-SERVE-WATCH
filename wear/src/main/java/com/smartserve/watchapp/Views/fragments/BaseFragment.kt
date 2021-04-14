@@ -28,6 +28,7 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dialog = DialogUtils.getProgressDialog(requireContext())
+
     }
 
 

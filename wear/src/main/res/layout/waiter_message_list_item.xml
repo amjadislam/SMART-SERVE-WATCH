@@ -19,47 +19,44 @@
         android:textColor="@color/colorAccent" />
     <androidx.cardview.widget.CardView
         app:cardCornerRadius="@dimen/_10sdp"
-        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
         android:layout_width="match_parent"
         app:cardElevation="@dimen/_5sdp"
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/tvMessage"
             android:textColor="@color/colorBlack"
-            android:padding="@dimen/_10sdp"
+            android:padding="@dimen/_12sdp"
+            android:textSize="@dimen/_16sdp"
             android:textAlignment="viewStart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </androidx.cardview.widget.CardView>
-
-   <RelativeLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
-       <TextView
-           android:layout_alignParentRight="true"
-           android:id="@+id/tvTitle"
-           android:layout_marginRight="@dimen/_25sdp"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_gravity="center_horizontal"
-           android:textSize="@dimen/_14sdp"
-           tools:text="Title test text"
-           android:layout_marginBottom="@dimen/_5sdp"
-           android:textColor="@color/colorGray"
-           />
-   </RelativeLayout>
-
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_alignParentRight="true"
+            android:id="@+id/tvTitle"
+            android:layout_marginRight="@dimen/_25sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/_16sdp"
+            tools:text="Title test text"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:textColor="@color/colorGray"
+            />
+    </RelativeLayout>
     <RelativeLayout
         android:visibility="gone"
         android:id="@+id/rlRootView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,9 +66,7 @@
             android:paddingRight="@dimen/header_end_padding"
             android:layout_centerVertical="true"
             android:orientation="vertical">
-
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -79,9 +74,7 @@
                 android:textSize="30sp"
                 tools:text="dssdf"
                 android:textColor="@color/colorAccent" />
-
             <TextView
-
                 android:layout_width="wrap_content"
                 android:gravity="center"
                 android:layout_height="wrap_content"
@@ -92,6 +85,5 @@
                 android:textColor="@color/colorBlack"
                 tools:text="test message" />
         </LinearLayout>
-
     </RelativeLayout>
 </LinearLayout>

@@ -38,9 +38,9 @@ class NotificationFragment : BaseFragment(R.layout.fragment_notification),
                 it.getContentIfNotHandled()?.let {
                     notifications.clear()
                     notifications.addAll(it.data)
+                    notificationAdapter?.notifyDataSetChanged()
                     if (notifications.isNullOrEmpty().not()) {
                         placeholder.gone()
-                        notificationAdapter?.notifyDataSetChanged()
                     }else{
                         placeholder.visible()
                     }

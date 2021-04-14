@@ -57,9 +57,9 @@ class FCMService : FirebaseMessagingService() {
                 ((applicationContext as SmartServeWatchApp).getCurrentActivity() as MainActivity).getCurrentFragment()
             if (fragment is NotificationFragment || fragment is PaidBillFragment || fragment is WaiterListFragment) {
                 EventBus.getDefault().post("")
-            }else{
-                sendNotification()
             }
+
+            sendNotification()
 
         }
 
