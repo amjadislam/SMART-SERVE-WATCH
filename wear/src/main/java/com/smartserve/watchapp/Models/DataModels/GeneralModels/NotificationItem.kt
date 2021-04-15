@@ -13,5 +13,6 @@ data class NotificationItem(
     val table_uuid: String,
     val time: Int,
     val type: String,
-    val user_uuid: String
+    val user_uuid: String,
+    val date_time:String
 )

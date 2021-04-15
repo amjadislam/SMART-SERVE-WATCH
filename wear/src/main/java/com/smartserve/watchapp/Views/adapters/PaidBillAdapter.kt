@@ -18,6 +18,6 @@ class PaidBillAdapter(var data: ArrayList<NotificationItem>, var callback: OnIte
         var time = data.created_at.substring(11,20)
         var formattedDate = data.created_at.dateToFullMothName()
         this.tvMessage.text=data.message
-        this.tvTitle.text=formattedDate
+        this.tvTitle.text=data.date_time
     }
 }
