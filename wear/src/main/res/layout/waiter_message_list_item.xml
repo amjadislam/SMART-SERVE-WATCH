@@ -31,7 +31,8 @@
             android:textColor="@color/colorBlack"
             android:padding="@dimen/_12sdp"
             android:textSize="@dimen/_16sdp"
-            android:textAlignment="viewStart"
+            android:text="Message"
+            android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </androidx.cardview.widget.CardView>

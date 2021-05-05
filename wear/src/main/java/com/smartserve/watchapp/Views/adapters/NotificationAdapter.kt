@@ -22,6 +22,4 @@ class NotificationAdapter(var data: ArrayList<NotificationItem>, var callback: O
             callback.onItemClick(0, data)
         }
     }
-
-
 }
