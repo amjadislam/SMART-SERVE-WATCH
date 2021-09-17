@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 28
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "29.0.2"
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId 'com.gsgroup.watch'
